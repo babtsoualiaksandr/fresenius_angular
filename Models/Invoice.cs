@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Fresenius_Angular.Models
 {
-    public class Invoice
+ public class Invoice
     {
         public int Id { get; set; }
         [Display(Name = "Номер")]
@@ -17,8 +13,6 @@ namespace Fresenius_Angular.Models
         public string Sender { get; set; }
         [Display(Name = "Получатель")]
         public string Recipient { get; set; }
-
-
-        public int [] Spareparts { get; set; }
+        public int[] SparePartsInInvoice { get; set; }
     }
 }

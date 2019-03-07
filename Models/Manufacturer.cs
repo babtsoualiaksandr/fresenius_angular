@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Fresenius_Angular.Models
 {
-    public class Manufacturer
+ public class Manufacturer
     {
         public int Id { get; set; }
         [Display(Name = "Код производителя")]
@@ -19,5 +15,7 @@ namespace Fresenius_Angular.Models
         public string AdressOfDeparture { get; set; }
         [Display(Name = "Лого")]
         public string Logo { get; set; } 
+        [Display(Name = "Фото Лого")]
+        public byte[] LogoFoto { get; set; } 
     }
 }

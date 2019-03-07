@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Fresenius_Angular.Models
 {
-    public class IdentityCard
+   public class IdentityCard
     {
         public int Id { get; set; }
         [Display(Name = "Номер регестрационного удостоверения")]
@@ -17,7 +14,7 @@ namespace Fresenius_Angular.Models
         public DateTime  Expiration { get; set; }
         [Display(Name = "Заявитель")]
         public string Applicant { get; set; }
-        [Display(Name = "Для чего это всё нужно :))")]
+        [Display(Name = "Предназначение :))")]
         public string Purpose { get; set; }
     }
 }

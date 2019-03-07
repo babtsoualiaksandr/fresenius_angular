@@ -1,25 +1,29 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-
-namespace Fresenius_Angular.Models
-{
-public class FreseniusContext : DbContext
-    {
-        public DbSet<Country> Countries { get; set; }
-        public DbSet<Equipment> Equipments { get; set; }
-        public DbSet<IdentityCard> IdentityCards { get; set; }
-        public DbSet<Invoice> Invoices { get; set; }
-        public DbSet<Manufacturer> Manufacturers { get; set; }
-        public DbSet<ProductNames> ProductNames { get; set; }
-        public DbSet<Sparepart> Spareparts { get; set; }
-
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseNpgsql("Host=localhost;Database=fresenius_angular;Username=postgres;Password=root");
-    }
+using Microsoft.EntityFrameworkCore;  
+namespace Fresenius_Angular.Models {     
+public class FreseniusContext : DbContext     
+  {   
+    //static FreseniusContext() => NpgsqlConnection.GlobalTypeMapper.MapEnum<cat_color>();      
+    public FreseniusContext(DbContextOptions<FreseniusContext> options): base(options)         
+{         
+}       
+    public DbSet<Country> Countries { get; set; }
+    public DbSet<Equipment> Equipments { get; set; }   
+    public DbSet<IdentityCard> IdentityCards { get; set; }  
+     public DbSet<Invoice> Invoices { get; set; }  
+      public DbSet<Manufacturer> Manufacturers { get; set; }  
+       public DbSet<ProductName> ProductNames { get; set; }  
+        public DbSet<SparePart> Spareparts { get; set; }  
+    
+    
+    
+    
+    
+    
+            protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //modelBuilder.Entity<Cat_colors_info>().HasKey(b => b.Color);
+            //Добавляется для того что бы перечесляемый тип появился в бд
+           // modelBuilder.ForNpgsqlHasEnum<cat_color>();
+        }
+   } 
 }
