@@ -1,23 +1,17 @@
-<p>
-  country works!
-</p>
-<p *ngIf="!forecasts"><em>Loading...</em></p>
-
-<table class='table table-striped' *ngIf="forecasts">
+<p *ngIf="!countries"><em>Loading...</em></p>
+<table class='table table-striped' *ngIf="countries">
   <thead>
     <tr>
-      <th>Date</th>
-      <th>Temp. (C)</th>
-      <th>Temp. (F)</th>
-      <th>Summary</th>
+        <th>N</th>
+      <th>Id</th>
+      <th>Название страны.</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let forecast of forecasts">
-      <td>{{ forecast.dateFormatted }}</td>
-      <td>{{ forecast.temperatureC }}</td>
-      <td>{{ forecast.temperatureF }}</td>
-      <td>{{ forecast.summary }}</td>
+    <tr *ngFor="let country of countries; let i=index">
+        <td>{{ i+1 }}</td>
+      <td>{{ country.id }}</td>
+      <td>{{ country.name }}</td>
     </tr>
   </tbody>
 </table>

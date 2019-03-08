@@ -6,6 +6,6 @@ interface WeatherForecast {
 }
 
 interface Country {
-  Id: number;
-  Nam: string;
+  id: number;
+  name: string;
 }

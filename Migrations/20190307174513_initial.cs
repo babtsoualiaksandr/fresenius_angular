@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Fresenius_Angular.Migrations
 {
-    public partial class iitial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,7 +14,7 @@ namespace Fresenius_Angular.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    Nam = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -31,8 +31,9 @@ namespace Fresenius_Angular.Migrations
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Image = table.Column<string>(nullable: true),
+                    Image_Byte = table.Column<byte[]>(nullable: true),
                     RegNumber = table.Column<string>(nullable: true),
-                    Date = table.Column<DateTime>(nullable: false)
+                    Date = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -66,7 +67,7 @@ namespace Fresenius_Angular.Migrations
                     Date = table.Column<string>(nullable: true),
                     Sender = table.Column<string>(nullable: true),
                     Recipient = table.Column<string>(nullable: true),
-                    Spareparts = table.Column<int[]>(nullable: true)
+                    SparePartsInInvoice = table.Column<int[]>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -83,7 +84,8 @@ namespace Fresenius_Angular.Migrations
                     NameFull = table.Column<string>(nullable: true),
                     NameShort = table.Column<string>(nullable: true),
                     AdressOfDeparture = table.Column<string>(nullable: true),
-                    Logo = table.Column<string>(nullable: true)
+                    Logo = table.Column<string>(nullable: true),
+                    LogoFoto = table.Column<byte[]>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -122,61 +124,17 @@ namespace Fresenius_Angular.Migrations
                     ManufacturerId = table.Column<int>(nullable: true),
                     CountryId = table.Column<int>(nullable: true),
                     Image = table.Column<string>(nullable: true),
-                    Mark = table.Column<bool>(nullable: false)
+                    Image_Byte = table.Column<byte[]>(nullable: true),
+                    InvoiceID = table.Column<int[]>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Spareparts", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Spareparts_Countries_CountryId",
-                        column: x => x.CountryId,
-                        principalTable: "Countries",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Spareparts_Equipments_EquipmentId",
-                        column: x => x.EquipmentId,
-                        principalTable: "Equipments",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Spareparts_Manufacturers_ManufacturerId",
-                        column: x => x.ManufacturerId,
-                        principalTable: "Manufacturers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Spareparts_CountryId",
-                table: "Spareparts",
-                column: "CountryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Spareparts_EquipmentId",
-                table: "Spareparts",
-                column: "EquipmentId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Spareparts_ManufacturerId",
-                table: "Spareparts",
-                column: "ManufacturerId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "IdentityCards");
-
-            migrationBuilder.DropTable(
-                name: "Invoices");
-
-            migrationBuilder.DropTable(
-                name: "ProductNames");
-
-            migrationBuilder.DropTable(
-                name: "Spareparts");
-
             migrationBuilder.DropTable(
                 name: "Countries");
 
@@ -184,7 +142,19 @@ namespace Fresenius_Angular.Migrations
                 name: "Equipments");
 
             migrationBuilder.DropTable(
+                name: "IdentityCards");
+
+            migrationBuilder.DropTable(
+                name: "Invoices");
+
+            migrationBuilder.DropTable(
                 name: "Manufacturers");
+
+            migrationBuilder.DropTable(
+                name: "ProductNames");
+
+            migrationBuilder.DropTable(
+                name: "Spareparts");
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Fresenius_Angular.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Nam");
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
@@ -38,11 +38,13 @@ namespace Fresenius_Angular.Migrations
 
                     b.Property<string>("Code");
 
-                    b.Property<DateTime>("Date");
+                    b.Property<string>("Date");
 
                     b.Property<string>("Description");
 
                     b.Property<string>("Image");
+
+                    b.Property<byte[]>("Image_Byte");
 
                     b.Property<string>("Name");
 
@@ -86,7 +88,7 @@ namespace Fresenius_Angular.Migrations
 
                     b.Property<string>("Sender");
 
-                    b.Property<int[]>("Spareparts");
+                    b.Property<int[]>("SparePartsInInvoice");
 
                     b.HasKey("Id");
 
@@ -104,6 +106,8 @@ namespace Fresenius_Angular.Migrations
 
                     b.Property<string>("Logo");
 
+                    b.Property<byte[]>("LogoFoto");
+
                     b.Property<string>("NameFull");
 
                     b.Property<string>("NameShort");
@@ -113,7 +117,7 @@ namespace Fresenius_Angular.Migrations
                     b.ToTable("Manufacturers");
                 });
 
-            modelBuilder.Entity("Fresenius_Angular.Models.ProductNames", b =>
+            modelBuilder.Entity("Fresenius_Angular.Models.ProductName", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -135,7 +139,7 @@ namespace Fresenius_Angular.Migrations
                     b.ToTable("ProductNames");
                 });
 
-            modelBuilder.Entity("Fresenius_Angular.Models.Sparepart", b =>
+            modelBuilder.Entity("Fresenius_Angular.Models.SparePart", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -148,9 +152,11 @@ namespace Fresenius_Angular.Migrations
 
                     b.Property<string>("Image");
 
-                    b.Property<int?>("ManufacturerId");
+                    b.Property<byte[]>("Image_Byte");
 
-                    b.Property<bool>("Mark");
+                    b.Property<int[]>("InvoiceID");
+
+                    b.Property<int?>("ManufacturerId");
 
                     b.Property<string>("NameEn");
 
@@ -160,28 +166,7 @@ namespace Fresenius_Angular.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CountryId");
-
-                    b.HasIndex("EquipmentId");
-
-                    b.HasIndex("ManufacturerId");
-
                     b.ToTable("Spareparts");
-                });
-
-            modelBuilder.Entity("Fresenius_Angular.Models.Sparepart", b =>
-                {
-                    b.HasOne("Fresenius_Angular.Models.Country", "Country")
-                        .WithMany()
-                        .HasForeignKey("CountryId");
-
-                    b.HasOne("Fresenius_Angular.Models.Equipment", "Equipment")
-                        .WithMany()
-                        .HasForeignKey("EquipmentId");
-
-                    b.HasOne("Fresenius_Angular.Models.Manufacturer", "Manufacturer")
-                        .WithMany()
-                        .HasForeignKey("ManufacturerId");
                 });
 #pragma warning restore 612, 618
         }
