@@ -1,0 +1,20 @@
+<p>
+  country-details works!
+</p>
+
+<p *ngIf="!country"><em>Loading...</em></p>
+<table class='table table-striped' *ngIf="country">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Название страны.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{ country.id }}</td>
+      <td>{{ country.name }}</td>
+      <td><button type="button" id="update" class="btn btn-success">Update</button></td>
+    </tr>
+  </tbody>
+</table>

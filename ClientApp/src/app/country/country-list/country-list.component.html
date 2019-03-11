@@ -1,4 +1,5 @@
 <p *ngIf="!countries"><em>Loading...</em></p>
+<a [routerLink]="['/country/create']">Create country</a>
 <table class='table table-striped' *ngIf="countries">
   <thead>
     <tr>
@@ -12,6 +13,9 @@
         <td>{{ i+1 }}</td>
       <td>{{ country.id }}</td>
       <td>{{ country.name }}</td>
+      <td><button type="button" id="details" class="btn btn-default" (click)="getCountryDetails(country.id)">Details</button></td>
+      <td><button type="button" id="update" class="btn btn-success" (click)="getCountryUpdate(country.id)">Update</button></td>
+      <td><button type="button" id="delete" class="btn btn-danger">Delete</button></td>
     </tr>
   </tbody>
 </table>

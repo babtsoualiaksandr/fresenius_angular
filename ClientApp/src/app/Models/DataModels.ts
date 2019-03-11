@@ -9,3 +9,7 @@ interface Country {
   id: number;
   name: string;
 }
+
+interface CountryForCreation {
+  name: string;
+}

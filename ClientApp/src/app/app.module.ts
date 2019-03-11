@@ -9,7 +9,10 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { CountryComponent } from './country/country.component';
+import { NotFoundComponent } from './error-pages/not-found/not-found.component';
+import { InternalServerComponent } from './error-pages/internal-server/internal-server.component';
+import { ErrorHandlerService } from './shared/error-handler.service';
+
 
 @NgModule({
   declarations: [
@@ -18,20 +21,26 @@ import { CountryComponent } from './country/country.component';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    CountryComponent
+    NotFoundComponent,
+    InternalServerComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'home', component: HomeComponent},
+      { path: '404', component : NotFoundComponent},
+      { path: '500', component: InternalServerComponent },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'country', component: CountryComponent },
+      { path: 'country', loadChildren: './country/country.module#CountryModule'},
+      { path: '', redirectTo: '/home', pathMatch: 'full' },
+      { path: '**', redirectTo: '/404', pathMatch: 'full'}
+
     ])
   ],
-  providers: [],
+  providers: [ErrorHandlerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

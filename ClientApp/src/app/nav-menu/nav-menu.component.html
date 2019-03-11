@@ -17,8 +17,8 @@
           <li class="nav-item" [routerLinkActive]='["link-active"]'>
             <a class="nav-link text-dark" [routerLink]='["/fetch-data"]'>Fetch data</a>
           </li>
-          <li class="nav-item" [routerLinkActive]='["link-active"]'>
-            <a class="nav-link text-dark" [routerLink]='["/country"]'>Country</a>
+          <li class="nav-item" [routerLinkActive]='["link-active"]'  [routerLinkActiveOptions]="{exact: true}">
+            <a class="nav-link text-dark" [routerLink]='["/country/list"]'>Country</a>
           </li>
         </ul>
       </div>

@@ -24,7 +24,7 @@ namespace Fresenius_Angular.Controllers
             {
                 Console.WriteLine("База стран пусто");
             }
-          
+
         }
 
         [HttpGet("[action]")]
@@ -56,7 +56,7 @@ namespace Fresenius_Angular.Controllers
 
         [HttpGet]
         [Route("countries")]
-        public async Task<ActionResult<IEnumerable<Country>>> GetCatsAtribut(string attribute = "no", string order = "no", int limit = -1, int offset = 0)
+        public async Task<ActionResult<IEnumerable<Country>>> GetCountryAtribut(string attribute = "no", string order = "no", int limit = -1, int offset = 0)
         {
             List<Country> countries = new List<Country>();
             countries = await _context.Countries.ToListAsync();
@@ -69,9 +69,9 @@ namespace Fresenius_Angular.Controllers
                     switch (attribute)
                     {
                         case "name": countries = countries.OrderBy(n => n.Name).ToList(); break;
-                      //  case "color": countries = countries.OrderBy(n => n.Color).ToList(); break;
-                       // case "tail_length": countries = countries.OrderBy(n => n.Tail_length).ToList(); break;
-                       // case "Whiskers_length": countries = countries.OrderBy(n => n.Whiskers_length).ToList(); break;
+                            //  case "color": countries = countries.OrderBy(n => n.Color).ToList(); break;
+                            // case "tail_length": countries = countries.OrderBy(n => n.Tail_length).ToList(); break;
+                            // case "Whiskers_length": countries = countries.OrderBy(n => n.Whiskers_length).ToList(); break;
 
                     }; break;
 
@@ -79,14 +79,39 @@ namespace Fresenius_Angular.Controllers
                     switch (attribute)
                     {
                         case "name": countries = countries.OrderByDescending(n => n.Name).ToList(); break;
-                      //  case "color": countries = countries.OrderByDescending(n => n.Color).ToList(); break;
-                      //  case "tail_length": countries = countries.OrderByDescending(n => n.Tail_length).ToList(); break;
-                      //  case "Whiskers_length": countries = countries.OrderByDescending(n => n.Whiskers_length).ToList(); break;
+                            //  case "color": countries = countries.OrderByDescending(n => n.Color).ToList(); break;
+                            //  case "tail_length": countries = countries.OrderByDescending(n => n.Tail_length).ToList(); break;
+                            //  case "Whiskers_length": countries = countries.OrderByDescending(n => n.Whiskers_length).ToList(); break;
 
                     }; break;
             }
             if ((limit > 0) & (limit < countries.Count())) countries = countries.Skip(offset).Take(limit).ToList();
             return countries;
+        }
+
+        [HttpGet("{id}")]
+
+        public async Task<ActionResult<Country>> GetCountryItem(int id)
+        {
+            Console.WriteLine("***********************************************************************");
+            Console.WriteLine(id);
+            var country = await _context.Countries.FindAsync(id);
+            if (country == null)
+            {
+                return NotFound();
+            }
+            return country;
+        }
+
+
+
+        [HttpPost]
+        public async Task<ActionResult<Country>> PostCountryItem(Country item)
+        {
+            Console.WriteLine("Yraaaa");
+            _context.Countries.Add(item);
+            await _context.SaveChangesAsync();
+            return CreatedAtAction(nameof(GetCountryItem), new { id = item.Id }, item);
         }
     }
 }
